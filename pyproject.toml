@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nanoplot-tokupic"
+dynamic = ["version"]
+description = 'Load and analyze DICOM images and videos recorded from TOKUPIC in the NanoPLoT setup.'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [{ name = "Brian Carlsen", email = "carlsen.bri@gmail.com" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = ["pydicom"]
+
+[project.urls]
+Documentation = "https://github.com/Weber-Microscopy-Group/nanoplot-tokupic#readme"
+Issues = "https://github.com/Weber-Microscopy-Group/nanoplot-tokupic/issues"
+Source = "https://github.com/Weber-Microscopy-Group/nanoplot-tokupic"
+
+[tool.hatch.version]
+path = "src/nanoplot_tokupic/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = ["mypy>=1.0.0"]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/nanoplot_tokupic tests}"
+
+[tool.coverage.run]
+source_pkgs = ["nanoplot_tokupic", "tests"]
+branch = true
+parallel = true
+omit = ["src/nanoplot_tokupic/__about__.py"]
+
+[tool.coverage.paths]
+nanoplot_tokupic = [
+  "src/nanoplot_tokupic",
+  "*/nanoplot-tokupic/src/nanoplot_tokupic",
+]
+tests = ["tests", "*/nanoplot-tokupic/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
